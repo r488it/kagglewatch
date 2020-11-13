@@ -9,7 +9,7 @@ chrome.contextMenus.create({
         var accesslog = {};
         var key = accessurl;
         accesslog[key] = 'good';
-        chrome.storage.local.set(accesslog, function() {
+        chrome.storage.sync.set(accesslog, function() {
             console.log('stored');
         });
     }
@@ -25,7 +25,7 @@ chrome.contextMenus.create({
         var accesslog = {};
         var key = accessurl;
         accesslog[key] = 'accessed';
-        chrome.storage.local.set(accesslog, function() {
+        chrome.storage.sync.set(accesslog, function() {
             console.log('stored');
         });
     }
@@ -40,7 +40,7 @@ chrome.contextMenus.create({
         // accessログを保存
         var accesslog = {};
         var key = accessurl;
-        chrome.storage.local.remove(key, function() {
+        chrome.storage.sync.remove(key, function() {
             console.log('removed');
         });
     }
@@ -53,7 +53,7 @@ chrome.contextMenus.create({
     "contexts" : ["all"],
     "onclick" : function(info){
         // accessログを取得
-        chrome.storage.local.get(function(items) { 
+        chrome.storage.sync.get(function(items) { 
             
             var accessedlog = JSON.stringify(items)
             var data = accessedlog

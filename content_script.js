@@ -18,7 +18,7 @@ var accessurl = ""
 // $(document).on('DOMNodeInserted', function(){
 	
 // 	// accessログを取得
-// 	chrome.storage.local.get(function(items) { 
+// 	chrome.storage.sync.get(function(items) { 
 		
 // 		accessedlog = items
 // 	})
@@ -31,7 +31,7 @@ $(document).on('click', function()
 	try {
 
 		// accessログを取得
-		chrome.storage.local.get(function(items) { 
+		chrome.storage.sync.get(function(items) { 
 			
 			accessedlog = items
 		})
@@ -40,8 +40,7 @@ $(document).on('click', function()
 		//　notebooks list
 		if ( accessurl.match(/notebooks/)) {
 			// notebooksの必要エレメントのルート
-			var Notebooks = document.getElementsByXPath(`//*[@id="site-content"]/div[2]/div/div[2]/div/div/div[2]/div/div[2]/div[2]/div/div/div`)
-
+			var Notebooks = document.getElementsByXPath(`//*[@class="smart-list__content"]/div/div`)
 
 			for (  var i = 0;  i < Notebooks.length;  i++  ) {
 
@@ -61,12 +60,15 @@ $(document).on('click', function()
 	
 				if (accessedlog[item_url]=="accessed"){
 					Notebooks[i].style.background = '#a9a9a9';
+					Notebooks[i].title="accessed"
 				}
 				else if (accessedlog[item_url]=="good"){
 					Notebooks[i].style.background = '#ffc0cb';
+					Notebooks[i].title="good"
 				}
 				else{
 					Notebooks[i].style.background = '#ffffff';
+					Notebooks[i].title=""
 				}
 		
 				
@@ -91,12 +93,15 @@ $(document).on('click', function()
 
 				if (accessedlog[item_url[i].href]=="accessed"){
 					item_url[i].style.background = '#a9a9a9';
+					item_url[i].title="accessed"
 				}
 				else if (accessedlog[item_url[i].href]=="good"){
 					item_url[i].style.background = '#ffc0cb';
+					item_url[i].title="good"
 				}
 				else{
 					item_url[i].style.background = '#ffffff';
+					item_url[i].title=""
 				}
 
 			}
@@ -117,8 +122,6 @@ $(document).on('click', function()
 		// }
 
 
-
-
 		}
 	catch (e) {
 		console.log( e.message );
@@ -129,3 +132,4 @@ $(document).on('click', function()
 var script = document.createElement('script');
 script.text = '(' + code.toString() + ')()';
 document.body.appendChild(script);
+
